@@ -1,0 +1,11 @@
+パスワードが分からなくなった場合の対処法
+
+1.rails c　を行う
+
+2.Customer.allを行う(登録情報の確認)
+
+3.Cusomer.find(:id).valid_password?('確認したいパスワードを入力')
+    trueが返ってきたらok, falseが返ってきたら登録されたものと一致しない
+    
+4.Customer.find(:id).update(password: '変更したいパスワードを入力')
+    trueが返ってくればパスワードの更新が完了

@@ -9,7 +9,7 @@ HTML基本書式
     <meta charset="UTF-8">  meta要素
     <title>⚪︎⚪︎⚪︎</title>    title要素
     </head>                 
-    <body></body>           body
+    <body></body>           body要素
     
     </html>
     

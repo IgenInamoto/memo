@@ -1,0 +1,55 @@
+ブランチ作成
+    git checkout -b ブランチ名
+    
+ブランチ移動
+    git checkout ブランチ名
+    
+トピックブランチにdevelopブランチの内容反映
+    git merge origin/develop
+    
+変更を退避する
+    git stash
+    
+退避した作業一覧を見る
+    git stash list
+    
+退避した作業を戻す
+    git stash apply stash@{0}(@{}は戻したい作業の数字を入れる)
+    
+    
+全員の共通の不具合が起きた時の対処法
+    1. 作業者が自分のブランチのadd commit
+    
+    2. developに移動
+    
+    3. 修正用のブランチを作成
+    
+    4. 上記のブランチで修正作業、push
+    
+    5. プルリクエストでdevelopでmerge
+    
+    
+    
+    1. 全員が自分のブランチのadd commit
+    
+    2. developに移動
+    
+    3. git pull origin develop
+    
+    4. 自分のブランチに戻る
+    
+    5. git merge origin/develop
+    
+    6. コンフリクトがあれば解消
+    
+Gitの操作をミスした時の対処法
+
+    1.Githubに上げてはいけないものをcommitまたはpushした時
+        Githubにpushしていない場合は「git reset」
+        Githubにpushしている場合は、強制push「git push -f origin ブランチ名」を利用し上書きする
+        
+    2.(Githubにあってもいいけど)余計なものをcommitしてしまった時
+        「git revert/git rm」コマンドでcommitを取り消す
+        
+    3.mainで編集してしまった時
+        「git stash」コマンドで一時的に退避をしてからブランチを移動する

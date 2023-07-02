@@ -1,0 +1,95 @@
+・Railsアプリケーションを作成する際の手順
+    
+    1. Railsアプリケーションのひな形を作成する(rails new アプリケーション名)
+    2. 作成したフォルダへ移動する
+    3. アプリケーションサーバを起動する
+    4. URLにアクセスする
+    5. ホスト許可の設定をする
+    6. アプリケーションサーバを再起動する
+    7. URLに再アクセスする
+    8. アプリケーションサーバを停止する
+    
+    
+・新規アプリケーション作成
+    rails new アプリケーション名
+    
+・アプリケーションの削除
+    rm -rf アプリケーション名
+    
+・サーバーの立ち上げ
+    rails s
+    →初回立ち上げ時は⚪︎⚪︎というホストがブロックされました。というエラーが出る。
+    (開発環境の場合)
+    cofig>environments>development.rbを開きconfig.hosts~という記述をコピーしてdevelopment.rbの中に貼り付ける。
+    その際Rails.application.configure doからendまでが読み込まれるため、endより下の行には貼り付けないようにする。
+    
+    ※注意※
+    config.hosts << "~.vfs.cloud9.us-east-1.amazonaws.com" という記述は
+    「~.vfs.cloud9.us-east-1.amazonaws.comというホストからしかアクセスできないようにする」という、セキュリティに関する設定です。
+    チーム開発などの共同作業では複数のホストからRailsアプリケーションにアクセスすることが多々あります。
+    そのため、development.rbから「config.hosts << "~.vfs.cloud9.us-east-1.amazonaws.com"」の部分を削除し、以下のように変更する。
+    
+    config.hosts.clear
+    この記述により、どんなホストからもアクセスできるようになる。
+
+
+・Railsでページを表示するための流れ
+
+    Railsでページを表示する際には、以下のような処理が行われている。
+    1. ユーザーがRailsアプリケーションのURLにアクセスする
+    2. そのURLに対応したコントローラとアクションを呼び出す
+    3. そのアクションに対応したビューを表示する
+    
+    それに対応して開発者が行う必要があるものは、以下の通り。
+    1. コントローラとアクションを作成する
+    2. アクションに対応したビューを作成する
+    3. コントローラとアクションをURLに対応させる
+    
+・コントローラの作成方法
+    rails g controller コントローラ名
+    →rails d に変えて同様の記述をするとコントローラを作成する際に作ったファイルを削除することができる。
+    
+    フォルダごとにコントローラを作成する場合
+    →rails g controller user/homes(このように記載するとuserフォルダ内にhomesコントローラが追加される)
+    
+・コントローラの命名規則
+    コントローラ名は全て複数形かつ全て小文字で書くようにする。
+    
+・Railsアプリケーションをブラウザに表示させるまでの手順。
+    コントローラを作成する(rails g controller コントローラ名)
+    1. アクションを定義する(<例> def top end等)
+    2. ルーティングを設定する(HTTPメソッド 'URL' => 'コントローラ#アクション')
+    3. ビューファイルを作成する
+    4. アプリケーションサーバを起動する(rails s)
+    5. URLにアクセスする
+    6. アプリケーションサーバを停止する(contoroll+C)
+    
+・モデルの作成
+    rails g model モデル名
+    
+    テーブルを指定して作成する場合
+    (例)rails g model User name:string email:string
+    
+    rails g modelコマンドを実行すると生成されるファイル
+    1.db/migrate/（作成日時）_create_lists.rb[重要]
+        「migrationファイル」というデータベースの設計図になるファイル。
+    2. app/models/list.rb[重要]
+        モデルクラスはデータベースに対応したRubyのクラス。
+    3. test/models/list_test.rb
+        モデルクラスのテストコードのひな形。
+    4.test/fixtures/lists.yml
+        テストデータ作成のためのひな形。
+        
+・画像を扱う際に行うこと
+    ActiveStorageのインストール
+    
+    rails active_storage:install
+    インストール後は rails db:migrate を忘れずに
+    
+    画像のサイズ変更を行うGemの導入
+    # gem 'image_processing', '~>1.2'
+    ↓
+    gem 'image_processing', '~>1.2'
+    
+    Gemに変更を加えたら"bundle install"を忘れずに
+    

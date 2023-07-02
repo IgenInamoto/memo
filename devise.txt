@@ -1,0 +1,18 @@
+・deviseをインストールする際の手順
+
+    Gemfileに"gem 'devise'を記載する"
+    ↓
+    bundle install
+    ↓
+    rails g devise:install
+    ↓
+    rails g devise モデル名
+    ↓
+    作成されたdeviseモデル、ユーザーテーブルの確認
+    ↓
+    変更などが完了したら"rails db:migrate"
+    
+・まとめ
+    devise を使用するためには、Gem のインストール後に改めて devise 自体のインストールが必要である
+    devise の機能を使用する場合、devise 独自のコマンドでモデルを作成する必要がある
+    devise のモデルを作成することで、routes.rb に自動的にルーティングが追加される

@@ -1,0 +1,23 @@
+基本的なルーティングの書き方
+
+    ・root to: 'homes#top'
+
+    ・get "/homes/about" => "homes#about"
+
+    ・resourses :モデル名
+
+resourcesとは
+    ・resources メソッドは、ルーティングを一括して自動生成してくれる機能。
+    作成されるルーティングは
+    ・new(投稿を作成する画面)
+    ・show(投稿の詳細画面)
+    ・index(投稿の一覧画面)
+    ・edit(投稿の編集画面)
+    ・create(投稿作成)
+    ・destroy(投稿削除)
+    ・update(投稿更新)
+    
+onlyオプションを使用することで、生成するルーティングを限定することができます。
+    <例>　resources :post_images, only: [:new, :index, :show]
+    この場合、only の後に配列で記述されている"new","index","show"のアクション以外は、ルーティングが行われない。
+    
